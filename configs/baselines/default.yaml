@@ -1,0 +1,18 @@
+seed: 1729
+baselines:
+  pseudotime_classifier:
+    enabled: true
+    use_curvature: false
+  graph_features_only:
+    enabled: true
+    features: [degree, pagerank, betweenness, diffusion_pseudotime]
+  cellrank:
+    enabled: true
+    mode: wrapper_if_available
+  monocle3:
+    enabled: true
+    mode: external_wrapper_or_documented_deviation
+  slingshot:
+    enabled: true
+    mode: external_wrapper_or_documented_deviation
+

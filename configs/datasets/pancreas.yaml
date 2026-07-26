@@ -1,0 +1,5 @@
+dataset: pancreas
+registry: configs/datasets/registry.yaml
+raw_filename: pancreas_raw.h5ad
+processed_filename: pancreas_processed.h5ad
+

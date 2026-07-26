@@ -1,0 +1,50 @@
+datasets:
+  pancreas:
+    enabled: true
+    loader: cellrank.datasets.pancreas
+    loader_kwargs:
+      kind: raw
+    official_api_url: https://cellrank.readthedocs.io/en/stable/api/_autosummary/datasets/cellrank.datasets.pancreas.html
+    backing_url: https://ndownloader.figshare.com/files/25060877
+    expected_shape: [2531, 27998]
+    organism: mouse
+    biological_system: pancreas endocrinogenesis E15.5
+    time_key_candidates: [day, time, latent_time, dpt_pseudotime, palantir_pseudotime]
+    lineage_key_candidates: [clusters, cluster, cell_type, celltype, terminal_states, fate]
+    batch_key_candidates: [batch, donor, sample, replicate]
+  lung:
+    enabled: true
+    loader: cellrank.datasets.lung
+    loader_kwargs: {}
+    official_api_url: https://cellrank.readthedocs.io/en/stable/api/_autosummary/datasets/cellrank.datasets.lung.html
+    backing_url: https://ndownloader.figshare.com/files/25038224
+    expected_shape: [24882, 24051]
+    organism: mouse
+    biological_system: lung epithelial regeneration after bleomycin injury
+    time_key_candidates: [day, time, timepoint, latent_time, dpt_pseudotime]
+    lineage_key_candidates: [clusters, cluster, cell_type, celltype, terminal_states, fate]
+    batch_key_candidates: [batch, donor, sample, replicate]
+  zebrafish:
+    enabled: true
+    loader: cellrank.datasets.zebrafish
+    loader_kwargs: {}
+    official_api_url: https://cellrank.readthedocs.io/en/latest/api/_autosummary/datasets/cellrank.datasets.zebrafish.html
+    backing_url: https://ndownloader.figshare.com/files/27265280
+    expected_shape: [2434, 23974]
+    organism: zebrafish
+    biological_system: axial mesoderm embryogenesis
+    time_key_candidates: [time, stage, hours, hpf, timepoint, latent_time, dpt_pseudotime]
+    lineage_key_candidates: [clusters, cluster, cell_type, celltype, terminal_states, fate]
+    batch_key_candidates: [batch, donor, sample, replicate]
+  paul15:
+    enabled: true
+    loader: scanpy.datasets.paul15
+    loader_kwargs: {}
+    official_api_url: https://scanpy.readthedocs.io/en/stable/api/scanpy.datasets.paul15.html
+    backing_url: scanpy.datasets.paul15
+    expected_shape: [2730, 3451]
+    organism: mouse
+    biological_system: myeloid progenitor hematopoiesis
+    time_key_candidates: [time, dpt_pseudotime, latent_time]
+    lineage_key_candidates: [paul15_clusters, clusters, cluster, cell_type, celltype]
+    batch_key_candidates: [batch, donor, sample, replicate]

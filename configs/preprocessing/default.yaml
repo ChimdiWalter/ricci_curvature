@@ -1,0 +1,22 @@
+seed: 1729
+qc:
+  min_counts_per_cell: 0
+  min_genes_per_cell: 0
+  min_cells_per_gene: 1
+normalization:
+  target_sum: 10000.0
+  log1p: true
+hvg:
+  n_top_genes: 2000
+latent:
+  method: pca
+  n_components: 50
+graph:
+  n_neighbors: 15
+  metric: euclidean
+  weight_scheme: heat_kernel
+  heat_kernel_sigma: auto
+denoising:
+  enabled: false
+  n_pcs: 30
+

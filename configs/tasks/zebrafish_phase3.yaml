@@ -1,0 +1,65 @@
+dataset: zebrafish
+
+early_fate_task:
+  name: early_lineage_prediction
+  status: valid
+  stage_key: Stage
+  lineage_key: lineages
+  label_source: developmental_lineage_annotations
+  rationale: |
+    Zebrafish provides a real developmental stage axis and lineage labels across
+    the trajectory. Phase 3 therefore uses the earliest lineage-resolved stage
+    window to predict Notochord versus Prechordal Plate.
+  early_stages:
+    - "04.3-DOME"
+    - "04.8-30%"
+    - "05.3-50%"
+  supported_labels:
+    - "Notochord"
+    - "Prechordal Plate"
+  excluded_labels:
+    - "Early Blastomeres"
+  evaluation:
+    split_strategy: repeated_stratified_label_holdout
+    test_size: 0.25
+    split_seeds: [1729, 1730, 1731, 1732, 1733]
+
+branch_region_task:
+  name: branch_region_ranking
+  status: valid_annotation_backed_proxy
+  cluster_key: Stage
+  label_source: early_branch_window
+  rationale: |
+    The rebuilt zebrafish graph shows its strongest lineage-mixing window at
+    stages 04.8-30% and 05.3-50%. Phase 3 uses those stages as the exact branch
+    window and a 1-hop graph neighborhood as the tolerant region.
+  stage_family_map:
+    "03.3-HIGH": early_blastomere
+    "03.8-OBLONG": early_blastomere
+    "04.3-DOME": onset_branch
+    "04.8-30%": branch_window
+    "05.3-50%": branch_window
+    "06.0-SHIELD": branch_window
+    "07.0-60%": post_branch
+    "08.0-75%": post_branch
+    "09.0-90%": post_branch
+    "10.0-BUD": post_branch
+    "11.0-3-Somite": late
+    "12.0-6-Somite": late
+  anchor_stages:
+    - "04.8-30%"
+    - "05.3-50%"
+  excluded_anchor_candidates:
+    - "04.3-DOME"
+    - "06.0-SHIELD"
+  tolerance_hops: 1
+  top_k: [10, 25, 50]
+  evaluation:
+    split_strategy: repeated_stratified_node_holdout
+    test_size: 0.25
+    split_seeds: [1729, 1730, 1731, 1732, 1733]
+
+bottleneck_detection:
+  status: exploratory_only
+  reason: |
+    No distinct biological bottleneck target is defined for zebrafish in this pass.

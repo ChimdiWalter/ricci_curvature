@@ -1,0 +1,58 @@
+dataset: paul15
+branch_region_task:
+  name: branch_region_ranking
+  label_source: lineage_transition_proxy_region
+  rationale: |
+    Paul15 lacks cell-level branch-point ground truth. Phase 2 therefore uses a
+    reviewed lineage-transition proxy region defined from cluster annotations and
+    cluster-to-cluster graph mixing, not from node betweenness or curvature.
+  family_map:
+    "1Ery": erythroid
+    "2Ery": erythroid
+    "3Ery": erythroid
+    "4Ery": erythroid
+    "5Ery": erythroid
+    "6Ery": erythroid
+    "7MEP": meg_ery_prog
+    "8Mk": megakaryocyte
+    "9GMP": gran_prog
+    "10GMP": gran_prog
+    "11DC": immune
+    "12Baso": immune
+    "13Baso": immune
+    "14Mo": immune
+    "15Mo": immune
+    "16Neu": granulocyte
+    "17Neu": granulocyte
+    "18Eos": granulocyte
+    "19Lymph": immune
+  anchor_clusters:
+    - "7MEP"
+    - "9GMP"
+    - "10GMP"
+    - "12Baso"
+  excluded_high_entropy_clusters:
+    - "8Mk"
+    - "17Neu"
+    - "18Eos"
+    - "19Lymph"
+  tolerance_hops: 1
+  top_k: [10, 25, 50]
+  evaluation:
+    split_strategy: repeated_stratified_node_holdout
+    test_size: 0.25
+    split_seeds: [1729, 1730, 1731, 1732, 1733]
+
+bottleneck_detection:
+  status: exploratory_only
+  reason: |
+    Current Paul15 bottleneck targets remain graph-derived and are not distinct
+    enough from generic bridge or hub structure for a primary benchmark claim.
+
+early_fate_prediction:
+  status: disabled_for_paul15
+  reason: |
+    Paul15 has no real time key in the current processed artifact, and the
+    lineage-holdout setup yields unseen test classes after early-cell
+    restriction. Early fate should move to a later dataset with cleaner
+    progression structure.

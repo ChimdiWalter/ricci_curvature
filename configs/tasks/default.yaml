@@ -1,0 +1,26 @@
+seed: 1729
+tasks:
+  branch_point_localization:
+    enabled: true
+    top_k: [10, 25, 50]
+    proxy:
+      centrality_quantile: 0.95
+      curvature_quantile: 0.05
+  early_fate_prediction:
+    enabled: true
+    early_fraction: 0.35
+    min_classes: 2
+  bottleneck_detection:
+    enabled: true
+    top_k: [10, 25, 50]
+  trajectory_segmentation:
+    enabled: true
+  cross_dataset_transfer:
+    enabled: true
+splits:
+  time_holdout_fraction: 0.25
+  lineage_holdout_fraction: 0.25
+  cluster_holdout_fraction: 0.2
+  graph_region_holdout_fraction: 0.2
+  repeats: 3
+

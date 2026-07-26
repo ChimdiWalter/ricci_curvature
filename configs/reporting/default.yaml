@@ -1,0 +1,14 @@
+seed: 1729
+bootstrap:
+  n_bootstrap: 1000
+  confidence_level: 0.95
+figures:
+  formats: [png, pdf]
+  dpi: 300
+  style: default
+tables:
+  float_format: "%.4f"
+manuscript:
+  template: manuscript/paper.md
+  require_artifact_for_claim: true
+

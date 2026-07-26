@@ -1,0 +1,60 @@
+canonical_graph:
+  k: 15
+  metric: euclidean
+  weight_scheme: heat_kernel
+  heat_kernel_sigma: auto
+
+feature_families:
+  canonical:
+    - degree_only
+    - weighted_degree_only
+    - centrality_only
+    - betweenness_only
+    - diffusion_pseudotime_only
+    - graph_feature_stack
+    - forman_curvature_only
+    - ollivier_curvature_only
+    - graph_plus_forman
+    - graph_plus_ollivier
+    - residualized_forman
+    - residualized_ollivier
+    - random_matched_control
+    - rewired_graph_control
+  sensitivity_without_ollivier:
+    - betweenness_only
+    - graph_feature_stack
+    - forman_curvature_only
+    - graph_plus_forman
+  sensitivity_with_ollivier:
+    - betweenness_only
+    - graph_feature_stack
+    - ollivier_curvature_only
+    - graph_plus_ollivier
+
+graph_sensitivity:
+  - name: k10_heat_kernel
+    k: 10
+    metric: euclidean
+    weight_scheme: heat_kernel
+    heat_kernel_sigma: auto
+    include_ollivier: true
+  - name: k30_heat_kernel
+    k: 30
+    metric: euclidean
+    weight_scheme: heat_kernel
+    heat_kernel_sigma: auto
+    include_ollivier: false
+  - name: k15_binary
+    k: 15
+    metric: euclidean
+    weight_scheme: binary
+    heat_kernel_sigma: auto
+    include_ollivier: false
+  - name: k15_distance
+    k: 15
+    metric: euclidean
+    weight_scheme: distance
+    heat_kernel_sigma: auto
+    include_ollivier: false
+
+rewire_seed: 1729

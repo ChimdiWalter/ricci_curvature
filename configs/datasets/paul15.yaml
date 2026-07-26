@@ -1,0 +1,5 @@
+dataset: paul15
+registry: configs/datasets/registry.yaml
+raw_filename: paul15_raw.h5ad
+processed_filename: paul15_processed.h5ad
+

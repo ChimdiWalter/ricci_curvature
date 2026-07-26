@@ -1,0 +1,94 @@
+dataset: pancreas
+metadata:
+  pseudotime_key: palantir_pseudotime
+  coarse_cluster_key: clusters
+  fine_cluster_key: clusters_fine
+  embedding_key: X_umap
+
+branch_region_task:
+  name: branch_region_ranking
+  status: valid
+  label_source: annotation_defined_endocrine_intermediate
+  rationale: |
+    The CellRank pancreas dataset contains published endocrine progression
+    annotations. Phase 3 therefore defines the exact branch region as the
+    generic Fev+ intermediate state, with a tolerant branch corridor that also
+    includes Ngn3 high EP cells immediately upstream of Fev+.
+  cluster_key: clusters
+  exact_positive_clusters:
+    - Fev+
+  tolerant_positive_clusters:
+    - Fev+
+    - Ngn3 high EP
+  family_map:
+    Ngn3 low EP: progenitor
+    Ngn3 high EP: progenitor
+    Fev+: branch
+    Alpha: alpha
+    Beta: beta
+    Delta: delta
+    Epsilon: epsilon
+  top_k: [10, 25, 50]
+  evaluation:
+    split_strategy: repeated_stratified_node_holdout
+    test_size: 0.25
+    split_seeds: [1729, 1730, 1731, 1732, 1733]
+
+early_fate_task:
+  name: early_endocrine_lineage_prediction
+  status: valid_narrow_scope
+  label_source: annotation_backed_early_committed_states
+  rationale: |
+    Pancreas does not provide lineage tracing labels for uncommitted Ngn3
+    progenitors. The Phase 3 early-fate benchmark is therefore restricted to
+    annotated early committed endocrine intermediates whose cluster labels
+    already encode lineage direction. This supports an honest benchmark for
+    early lineage-family prediction, not for full future-fate inference from
+    uncommitted progenitors.
+  cluster_key: clusters_fine
+  eligible_clusters_by_label:
+    alpha:
+      - Pre-Alpha
+      - Fev+ Alpha
+    beta:
+      - Pre-Beta
+      - Fev+ Beta
+    delta:
+      - Fev+ Delta
+    epsilon:
+      - Fev+ Epsilon
+  excluded_clusters:
+    - Ngn3 low EP
+    - Ngn3 high EP
+    - Fev+ Pyy
+    - Alpha
+    - Beta
+    - Delta
+    - Epsilon
+  evaluation:
+    split_strategy: repeated_stratified_node_holdout
+    test_size: 0.25
+    split_seeds: [1729, 1730, 1731, 1732, 1733]
+
+bottleneck_task:
+  status: exploratory_only
+  reason: |
+    Pancreas does not currently provide a distinct bottleneck annotation beyond
+    the branch/intermediate progression states already used above. Bottleneck
+    analysis may be useful descriptively, but it should not be benchmarked as a
+    main task in this pass.
+
+interpretation:
+  markers:
+    progenitor:
+      - Neurog3
+      - Fev
+    alpha:
+      - Gcg
+    beta:
+      - Ins1
+      - Ins2
+    delta:
+      - Sst
+    epsilon:
+      - Ghrl

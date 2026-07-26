@@ -1,0 +1,5 @@
+dataset: lung
+registry: configs/datasets/registry.yaml
+raw_filename: lung_raw.h5ad
+processed_filename: lung_processed.h5ad
+

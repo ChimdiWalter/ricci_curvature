@@ -1,0 +1,14 @@
+seed: 1729
+classifier:
+  type: logistic_regression
+  max_iter: 2000
+  class_weight: balanced
+  calibration: sigmoid
+features:
+  expression_pcs: true
+  graph_features: true
+  curvature_features: true
+curvature:
+  ollivier_alpha: 0.5
+  max_ollivier_edges: null
+  note: Set max_ollivier_edges for smoke runs only; final analyses should compute all selected edges or document the approximation.
